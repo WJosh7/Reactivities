@@ -15,7 +15,7 @@ export default function ActivityDetails({activity,cancelSelectActivity,openForm}
    
     return (
         <Card fluid>
-           <img src={`/assets/categoryImages/${activity.category}.jpg`}/>
+           <img alt="activity photos" src={`/assets/categoryImages/${activity.category}.jpg`}/>
            <Card.Content>
                 <Card.Header>{activity.title}</Card.Header>
                 <Card.Meta>
