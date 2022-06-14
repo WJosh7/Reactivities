@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import './styles.css';
-import { Container } from 'semantic-ui-react';
+import { Button, Container } from 'semantic-ui-react';
 import { Activity } from '../models/activity';
 import NavBar from './NavBar';
 import ActivityDashboard from '../../features/activities/dashboard/ActivitiesDashboard';
 import {v4 as uuid} from 'uuid';
 import agent from '../api/agent';
 import LoadingComponent from './LoadingComponent';
+import { useStore } from '../stores/store';
+import { observer } from 'mobx-react-lite';
+
+
 
 function App() 
 {
+  const {activityStore} = useStore();
+  
   const [activities,setActivities]= useState<Activity[]>([]);
   const [selectedActivity,setSelectedActivity] = useState<Activity | undefined>(undefined)
   const [editMode, setEditMode] = useState( false );
@@ -47,7 +53,7 @@ function App()
        })
         
   }
-
+ 
   function handleCancelSelectActivity(){
        
     setSelectedActivity(undefined);
@@ -100,9 +106,12 @@ function App()
     <div >
        <>
          <NavBar openForm={handleFormOpen}/>
+         
          <Container style={{marginTop:'7em'}}>
+         
+         <Button content='add !' positive onClick={activityStore.setTitle}/>
+         <h2>{activityStore.title}</h2>
             <ActivityDashboard 
-            
                 activities={activities}
                 selectedActivity={selectedActivity}
                 selectActivity = {handleSelectActivity}
@@ -121,4 +130,6 @@ function App()
     </div>
   )
 }
-export default App;
+export default observer(App);
+
+
