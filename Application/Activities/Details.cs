@@ -28,10 +28,14 @@ namespace Application.Activities
 
             public async  Task<Activity> Handle(Query request, CancellationToken cancellationToken)
             {
+             
+
                 return await _context.Activities.FindAsync(request.Id);
+              
+                
             }
 
-            //handles requests
+            
 
         }
     }
